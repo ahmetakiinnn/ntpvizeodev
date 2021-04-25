@@ -19,55 +19,57 @@ namespace ntpvizeodev
         {
             InitializeComponent();
         }
-        public const string linq = "https://www.milliyet.com.tr/rss/rssnew/gundemrss.xml";
+        public const string linq = "https://www.milliyet.com.tr/rss/rssnew/gundemrss.xml"; 
 
         private void Form1_Load(object sender, EventArgs e)
         {
            
 
         }
-        private void f1()
+        private void f1() // f1 sınıfı olusturdum.
         {
-            XDocument deneme = XDocument.Load(linq); 
+            XDocument deneme = XDocument.Load(linq);  
 
-            string fileName = @"C:\Users\ahmet\source\repos\ntpvizeodev\ntpvizeodev\ntp.txt";
+            string fileName = @"C:\Users\ahmet\source\repos\ntpvizeodev\ntpvizeodev\ntp.txt";// olusturulacak dosyanın konumunu belirler.
 
-            FileInfo fi = new FileInfo(fileName);
-            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
+            FileInfo fi = new FileInfo(fileName); 
+            FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write); //dosyayı olusturup düzenleyip yazmayı saglıyor.
 
             fs.Close();
 
             for (int i = 2; i < 50; i++)
             {
-                string haber = deneme.Descendants("title").ElementAt(i).Value;
-                dataGridView1.Rows.Add(haber);
-                string writeText = haber;
-                File.AppendAllText(fileName, Environment.NewLine + writeText);
+                string haber = deneme.Descendants("title").ElementAt(i).Value; // haber başlıklarını çeker.
+                dataGridView1.Rows.Add(haber);       // tabloya verileri eklemeyi saglar
+                string writeText = haber;            
+                File.AppendAllText(fileName, Environment.NewLine + writeText);// txt dosyasına yazı yazdırır.
             }
         }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) 
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // buton 1 e tıklandıgında // sil butonu
         {
-            string fileName = @"C:\Users\ahmet\source\repos\ntpvizeodev\ntpvizeodev\ntp.txt";
-            File.Delete(fileName);
-            dataGridView1.Rows.Clear();
+            string fileName = @"C:\Users\ahmet\source\repos\ntpvizeodev\ntpvizeodev\ntp.txt"; // dosyayı cagırır.
+
+            File.Delete(fileName); // txt dosyasını siler,
+
+            dataGridView1.Rows.Clear();// tabloyu siler.
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) // goruntulenme butonu
         {
-            f1();
+            f1(); // f1 sınıfını cagırır.
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) // guncelleme butonu 
         {
-            string fileName = @"C:\Users\ahmet\source\repos\ntpvizeodev\ntpvizeodev\ntp.txt";
-            File.Delete(fileName);
-            dataGridView1.Rows.Clear();
-            f1();
+            string fileName = @"C:\Users\ahmet\source\repos\ntpvizeodev\ntpvizeodev\ntp.txt"; //dosyamız.
+            File.Delete(fileName); // txt dosyaysını siler
+            dataGridView1.Rows.Clear(); // tablodaki verileri siler.
+            f1(); // f1 sınıfını cagırır.
         }
     }
 }
